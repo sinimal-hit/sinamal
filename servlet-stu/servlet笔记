@@ -1,0 +1,72 @@
+一:XML
+    什么是XML:
+        可扩展的标记语言
+
+    作用:
+        1:存储数据
+        2:(主要)配置文件 读取解析里面的数据
+
+二:Tomcat
+        bin:装的是可执行文件  start.bat......
+        conf:配置文件
+        lib:装的全都是架包
+        temp
+        log:日志
+        webapps:应用源码,部署应用的代码
+        work
+
+     web应用目录结构
+        css
+        js
+        1.html
+        WEB-INF
+            classes
+            lib
+            web.xml
+
+三:HTTP
+    请求:
+        请求消息行
+            get|post
+                get:明文提交
+                    消息行就提交股过去
+                       http://localhost:8080/web/1.html?name = tom&password = 123  http/1.1
+                    get传输数据比较小,理论上是1kb 不同浏览器传输数据大小不同
+                post:暗文提交
+        请求消息头
+        请求消息正文
+    响应:
+        响应消息行
+            http/1.1 200 ok   //200代表服务器响应正常,ok是对响应码的描述
+        相应消息头
+        响应正文:
+
+
+
+四: Servlet
+    servlet是运行在web服务器中的小型java程序,(即:服务器端的小应用程序)
+        servlet通常通过HTTP接收和响应web客户端的请求
+
+    HttpServlet类中doGet方法有这样的语句
+        String protocol = req.getProtocol();
+            req.getProtocol() 请求对象获取协议版本号
+
+
+        整个doGet方法源码
+            protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+                throws ServletException, IOException
+            {
+                String protocol = req.getProtocol();
+                String msg = lStrings.getString("http.method_get_not_supported");
+                if (protocol.endsWith("1.1")) {
+                    resp.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, msg);
+                } else {
+                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST, msg);
+                }
+            }
+        假如你继承HttpServlet类没有实现doGet方法,那么默认servlet会寻找doGet方法,而此时的
+        doGet方法用户并没有自己重现,此时调用的就是重写之前的doGet方法,所以就会出现405错误
+        会出现"http.method_get_not_supported" 也就是在请求的方法是不允许的
+
+
+

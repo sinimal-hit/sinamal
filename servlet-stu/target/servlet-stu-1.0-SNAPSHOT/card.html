@@ -1,0 +1,66 @@
+<!--
+简单的调试手段:
+       alert(): 弹出窗
+       console.log():开发者工具console面板输出打印;
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="l(1)">
+
+    <script>
+        alert(2);
+        var articles = [{
+            title:"我的第一篇博客",
+            content: "学习HTML"
+        },{
+            title:"我的第二篇博客",
+            content: "学习JS"
+        }];
+        //打印对象:控制台打印
+        console.log(articles[0]);
+        console.log(JSON.stringify(articles))
+
+        //函数的声明方式,  function 函数名 (参数) {函数内容}
+        //JS里的变量是动态变量,在定义的时候不需要声明数据类型,在调用函数的时候会直接根据传入的参数来进行选择
+        //调用函数传参的时候,也可以传入一个参数
+        function l(x,y,z) {
+            console.log(x+"," + y + "," + z );
+        }
+        l(1,2,3);//
+    </script>
+
+<!--    <script type="application/javascript" src = 'js/1.js'></script>-->
+
+    <h1>个人名片</h1>
+    <p>求职意向 : java开发工程师</p>
+    <p>姓名 : 世界真好 </p>
+    <p>联系方式 : 110</p>
+    <p>邮箱 : 8888888@qq.com</p>
+    <a href="https://mp.csdn.net/console/article?spm=1000.2115.3001.5448">我的博客</a>
+    <p></p>
+    <a href="https://github.com/sinimal-hit">我的github</a>
+
+
+
+    <h2>教育背景</h2>
+    <ol>
+        <p>本科毕业于西安工业大学信心管理与信息系统专业</p>
+        <p>在校期间担任班级重要职位</p>
+
+    </ol>
+
+    <h2>专业技能</h2>
+    <ul>
+        <p>java基础语法扎实,已经刷了800道力扣题</p>
+        <p>常见的数据结构可以独立实现并熟练应用</p>
+        <p>熟知计算机网络理论,并且可以独立排查常见的问题</p>
+        <p>掌握Web开发能力,并且独立开发了学校的表白墙功能</p>
+    </ul>
+</body>
+</html>
