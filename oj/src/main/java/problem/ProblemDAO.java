@@ -20,13 +20,14 @@ public class ProblemDAO {
         PreparedStatement statement = null;
         try {
             // 2. 拼装 SQL 语句
-            String sql = "insert into oj_table values(null, ?, ?, ?, ?, ?)";
+            String sql = "insert into oj_table values(?, ?, ?, ?, ?, ?)";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, problem.getTitle());
-            statement.setString(2, problem.getLevel());
-            statement.setString(3, problem.getDescription());
-            statement.setString(4, problem.getTemplateCode());
-            statement.setString(5, problem.getTestCode());
+            statement.setInt(1,problem.getId());
+            statement.setString(2, problem.getTitle());
+            statement.setString(3, problem.getLevel());
+            statement.setString(4, problem.getDescription());
+            statement.setString(5, problem.getTemplateCode());
+            statement.setString(6, problem.getTestCode());
             // 3. 执行 SQL
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -129,6 +130,79 @@ public class ProblemDAO {
         return null;
     }
 
+    private static void testInsert2(){
+        Problem problem = new Problem();
+        problem.setId(2);
+        problem.setTitle("回文数");
+        problem.setLevel("简单");
+        problem.setDescription("给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。\n" +
+                "\n" +
+                "回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。例如，121 是回文，而 123 不是。\n" +
+                "\n" +
+                " \n" +
+                "\n" +
+                "示例 1：\n" +
+                "\n" +
+                "输入：x = 121\n" +
+                "输出：true\n" +
+                "示例 2：\n" +
+                "\n" +
+                "输入：x = -121\n" +
+                "输出：false\n" +
+                "解释：从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。\n" +
+                "示例 3：\n" +
+                "\n" +
+                "输入：x = 10\n" +
+                "输出：false\n" +
+                "解释：从右向左读, 为 01 。因此它不是一个回文数。\n" +
+                "示例 4：\n" +
+                "\n" +
+                "输入：x = -101\n" +
+                "输出：false\n" +
+                " \n" +
+                "\n" +
+                "提示：\n" +
+                "\n" +
+                "-231 <= x <= 231 - 1\n" +
+                " \n" +
+                "\n" +
+                "来源：力扣（LeetCode）\n" +
+                "链接：https://leetcode-cn.com/problems/palindrome-number\n" +
+                "著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。");
+        problem.setTemplateCode("class Solution {\n" +
+                "    public boolean isPalindrome(int x) {\n" +
+                "\n" +
+                "    }\n" +
+                "}");
+        problem.setTestCode("public static void main(String[] args) {\n" +
+                "        Solution solution = new Solution();\n" +
+                "        int count = 0;\n" +
+                "        int testNum1 = 121;\n" +
+                "        int testNum2 = -121;\n" +
+                "        int testNum3 = 10;\n" +
+                "        int testNum4 = -101;\n" +
+                "        if(solution.isPalindrome(testNum1)){\n" +
+                "            count++;\n" +
+                "        }\n" +
+                "        if(solution.isPalindrome(testNum2)){\n" +
+                "            count++;\n" +
+                "        }\n" +
+                "        if(solution.isPalindrome(testNum3)){\n" +
+                "            count++;\n" +
+                "        }\n" +
+                "        if(solution.isPalindrome(testNum4)){\n" +
+                "            count++;\n" +
+                "        }\n" +
+                "        if(count == 1){\n" +
+                "            System.out.println(\"TestCase OK!\");\n" +
+                "        }else {\n" +
+                "            System.out.println(\"TestCaseFailed!\");\n" +
+                "        }\n" +
+                "\n" +
+                "    }");
+        ProblemDAO problemDAO = new ProblemDAO();
+        problemDAO.insert(problem);
+    }
     private static void testInsert() {
         Problem problem = new Problem();
         problem.setId(1);
@@ -177,7 +251,7 @@ public class ProblemDAO {
                 "        int[] arr = {2,7,11,15};\n" +
                 "        int target = 9;\n" +
                 "        int[] result = solution.twoSum(arr, 9);\n" +
-                "        if (result.length == 2 && result[0] == 1 && result[1] == 2) {\n" +
+                "        if (result.length == 2 && result[0] == 0 && result[1] == 1) {\n" +
                 "            System.out.println(\"TestCase OK!\");\n" +
                 "        } else {\n" +
                 "            System.out.println(\"TestCase Failed! arr: {2, 7, 11, 15}, target: 9\");\n" +
@@ -198,7 +272,7 @@ public class ProblemDAO {
 
     private static void testDelete() {
         ProblemDAO problemDAO = new ProblemDAO();
-        problemDAO.delete(1);
+        problemDAO.delete(3);
     }
 
     private static void testSelectAll() {
@@ -215,12 +289,14 @@ public class ProblemDAO {
 
     public static void main(String[] args) {
         // 1. 先测试一下插入逻辑
-        testInsert();
+        //testInsert2();
         // 2. 测试删除逻辑
         // testDelete();
         // 3. 测试查找所有记录
         // testSelectAll();
         // 4. 验证查询一条记录
         // testSelectOne();
+
+        testDelete();
     }
 }

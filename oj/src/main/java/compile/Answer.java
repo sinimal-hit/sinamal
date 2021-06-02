@@ -23,5 +23,6 @@ public class Answer {
     private String stdout;
     // 程序的标准错误
     private String stderr;
+    //private String timeMemory;
 
 }

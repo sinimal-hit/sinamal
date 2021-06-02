@@ -2,6 +2,7 @@ package compile;
 
 import javafx.concurrent.Worker;
 import util.FileUtil;
+import util.TimeMemoryUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,7 +68,7 @@ public class Task {
 
         //1.将用户的代码片段写入CODE文件当中,
         FileUtil.writeFile(CODE,question.getCode());
-
+        //TimeMemoryUtil.start();//记录开始的时间和JVM编译运行前内存
         //2.设置编译的路径
         //javac -encoding utf-8 ./tmp/Solution.java -d ./tmp/ -d参数表示生成class文件的路径
         String compileCmd = String.format("javac -encoding utf-8 %s -d %s",CODE,WORK_DIR);
@@ -102,7 +103,9 @@ public class Task {
         //编译阶段和运行阶段没有出错,返回结果
         answer.setErrno(0);
         String stdout = FileUtil.readFile(STDOUT);
+        //String timeMemory = TimeMemoryUtil.end();
         answer.setStdout(stdout);
+        //answer.setTimeMemory(timeMemory);
         return answer;
     }
     public static void main(String[] args) throws IOException, InterruptedException {
