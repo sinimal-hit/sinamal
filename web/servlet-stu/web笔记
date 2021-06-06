@@ -1,0 +1,38 @@
+tomcat和servlet的关系:
+ 相当于说tomcat就是servlet的一个容器,servlet的初始化方法,service方法以及destroy方法都是由tomcat 管理的,以及
+ 对象的创建都是由tomcat提供的
+
+
+端口号被占用: netstat -ano| findstr 8080
+
+页面跳转
+    客户端js代码跳转页面
+          html      <a href ="跳转的路径">链接标签,点击跳转
+          js代码
+                window.location.href = "home.html";
+                这种代码就发起页面跳转
+    服务端的页面跳转:转发,重定向
+
+
+
+    客户端js代码发送ajax异步请求
+        使用比较主流的前端框架来实现
+
+
+tomcat如何管理servlet?
+    首先客户端发送http请求,tomcat服务器自动解析http请求数据
+    根据上下文路径查找应用
+    根据服务路径找到servlet
+    servlet处理http请求,返回响应调用servlet对象的service方法
+
+
+
+
+客户端js代码发送ajax异步请求,
+    关于json:
+        前端有json对象
+        请求/响应数据(body),也可以是json
+            此时Content-Type为 application/json
+    java代码完成对象和json字符串的相互转换
+        反序列化:json字符串转变为java对象
+        序列化:java对象转变为json字符串
