@@ -1,0 +1,49 @@
+一.JSP是什么?
+    Java Server Pages:java服务器端页面,也和Servlet一样,用于开发动态页面技术
+    最大的特点:
+        写JSP就像写html
+        区别
+            html只给用户提供静态的数据
+            jsp页面中可以嵌入java代码,可以提供动态数据
+
+二:JSP原理
+    JSP到底是怎么执行的?
+        服务器内部工作
+            tomcat中有一个work目录
+            IDEA中使用Tomcat的会在IDEA的tomcat中生产一个work目录
+        浏览器向服务器发送一个请求,不管访问什么资源,其实都是在访问Servlet
+        jsp会最终转为一个java类
+        jsp本质上就是servlet
+
+    在jsp页面中
+        如果是java代码会被原封不动的输出
+        如果是html代码,就会被转化为:
+            out.write("<html>/r\n")的格式
+
+三.JSP的基础语法<详见jsplearn.jsp>
+    任何语言都有自己的语法,java中有,JSP最为java技术的一种应用看他拥有一些自己扩充的语法
+
+    jsp表达式
+
+        <%--作用:用来将程序的结果输出到客户端
+        <%= 变量表达式%>
+        --%>
+        <%= new java.util.Date()%>
+
+    jsp脚本片段
+
+        <%
+            int sum = 0;
+            for (int i = 1; i < 100; i++) {
+                sum+=i;
+            }
+            out.println("<h1>Sum=" + sum + "<h1>");
+        %>
+
+    jsp声明
+        <%!   %>
+
+    声明会被编译到jsp生成的java类中!,其他的就会生成到jspService方法中
+四:JSP的指令<详见jsplearn2>
+    1: <%@page args...%>
+    2: <%@include file=
