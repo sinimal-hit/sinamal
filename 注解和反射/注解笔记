@@ -1,0 +1,14 @@
+一 什么是注解
+    Annotation是JDK5.0引入的新技术,
+
+    Annotation的作用
+        ①:Annotation不是程序本身,可以对程序做出解释,(这一点和注释comment没什么区别)
+        ②:可以被其他程序(比如:编译器)读取
+
+二 元注解
+    元注解的作用就是负责注解其他注解
+        @Target @Retention @Documented @Inherited
+            @Target:用于描述注解的使用范围,即被描述的注解可以用在什么地方(比如说类.方法,构造器)
+            @Retention:表示许哟啊在什么级别保存该注解信息,用于描述注解的生命周期
+            @Documented:说明该注解将被包含在javadoc中
+            @Inherited:说明该注解可以继承夫类中的该注解

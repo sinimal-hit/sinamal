@@ -1,0 +1,51 @@
+一 静态语言与动态语言
+    动态语言:在运行的时候可以改变其结构的语言
+        c#,PHP,javaScript,python
+    静态语言:运行时结构不可变的语言
+        java,c,c++
+
+        java不是动态语言,但可以称为"准动态语言"
+二 Java Reflection
+    Reflection是java被视为动态语言的关键,反射机制允许程序在执行期间借助于Reflection API取得类得
+        内部信息,并能直接操作任意对象的内部属性及方法
+
+    Class c = Class.forName("java.lang.String")
+    加载完类之后,在堆内存的方法区中就产生了一个Class类型的对象(一个类只有一个Class对象),这个对象就包含
+        了完整的类的结构信息,我们可以通过这个对象看到类的结构,这个对象就像一个镜子,透过这个镜子看到类的
+        结构,所以我们,形象的称之为:反射
+
+    正常方式
+       引入需要的"包类"名称-->通过new实例化-->取得实例对象
+
+    反射方式
+        实例化对象--->getClass()方法 --->得到完整得包类名称
+
+三:有了Class对象,能做什么 详见Test09
+    创建类的对象:调用Class对象的newInstance()方法
+        1) 类必须要有一个无参数构造器
+        2) 类的构造器的访问权限需要足够
+
+
+     这个Accessible不应该翻译成设置诚问性为真吗
+
+     setAccessible
+     Method和Field、Constructor对象都有setAccessible()方法。
+     setAccessible作用是启动和禁用访问安全检查的开关。
+        参数值为true则指示反射的对象在使用时应该取消Java语言访问检查。
+        提高反射的效率。如果代码中必须用反射，而该句代码需要频繁的被调用
+        ，那么请设置为true。>使得原本无法访问的私有成员也可以访问
+     参数值为false则指示反射的对象应该实施Java语言访问检查
+
+
+
+
+反射操作泛型
+    Java采用泛型擦除的机制来引入泛型,Java中的泛型仅仅是给编译器javac使用的,确保数据
+        的安全性和免去强制类型转换问题，但是，一旦编译完成﹐所有和泛型有关的类型全部擦除
+
+    为了通过反射操作这些类型,Java新增了ParameterizedType , GenericArrayType ,
+    TypeVariable和 WildcardType几种类型来代表不能被归一到Class类中的类型但是又和原始类型齐名的类型.
+
+    ParameterizedType:表示一种参数化类型,比如Collection<String>
+    GenericArrayType:表示一种元素类型是参数化类型或者类型变量的数组类型>TypeVariable:是各种类型变量的公共父接口
+    WildcardType:代表一种通配符类型表达式
