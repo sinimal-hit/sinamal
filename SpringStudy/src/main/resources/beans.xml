@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--使用spring创建我们的对象,,在Spring这些都成为Bean
+        这里的bean = 对象, 相当于new Hello();
+        java的 代码层面是
+        类型   变量名  = new 类型()
+        Hello hello = new Hello();
+
+        这里的id 就是变量名
+        class 就是new 的对象
+        property相当于给属性设置的一个值
+    -->
+    <bean id="hello" class="com.doer.pojo.Hello">
+        <property name="str" value="Spring"/>
+    </bean>
+
+    <!--    默认时使用无参构造方法创建对象,如果类没有提供无参构造方法,会抛出异常-->
+    <!--    <bean id="user" class="com.doer.ioc.User">-->
+    <!--        <property name="name" value="Doer"/>-->
+    <!--    </bean>-->
+
+    <!--    有构造方法的第一种:下标赋值-->
+    <!--    <bean id="user" class="com.doer.ioc.User">-->
+    <!--        <constructor-arg index="0" value="Doer"/>-->
+    <!--    </bean>-->
+
+    <!--    第二种方式,通过类型创建,不建议使用,因为如果有参构造方法的参数有两个就会出现问题 -->
+    <!--    <bean id="user" class="com.doer.ioc.User">-->
+    <!--        <constructor-arg type="java.lang.String" value="Doer"/>-->
+    <!--    </bean>-->
+
+    <!--  第三种方式,直接通过参数名来创建对象  -->
+    <bean id="user" class="com.doer.ioc.User">
+        <constructor-arg name="name" value="Doer"/>
+    </bean>
+
+    <!--    通过别名也可以获取到这个对象-->
+    <alias name="user" alias="nihaoshijie"/>
+
+    <!--
+        id: bean的唯一标识符,也就是相当于我们javaSE阶段的对象名,引用
+        class:bean对象所对应的全限定名 :包名+类名
+        name :也是别名,而且name可以同时起多个别名
+    -->
+    <bean id="user2" class="com.doer.ioc.User2" name="user22,user23">
+        <property name="name" value="doer"/>
+    </bean>
+    <bean id="student" class="com.doer.di.Student">
+        <property name="name" value="朵儿"/>
+    </bean>
+
+</beans>
