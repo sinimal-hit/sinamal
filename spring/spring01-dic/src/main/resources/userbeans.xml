@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--p命名空间的注入需要依赖第三方 set方式的注入
+           xmlns:p="http://www.springframework.org/schema/p"
+    -->
+    <bean id="user" class="com.doer.User" p:name="朵儿" p:age="18"/>
+
+    <!-- c命令空间的注入,构造器的方式注入-->
+    <bean id="user2" class="com.doer.User" c:age="18" c:name="doer" scope="prototype"/>
+</beans>
