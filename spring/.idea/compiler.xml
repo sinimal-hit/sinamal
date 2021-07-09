@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring04-appconfig" />
+        <module name="spring07-mybatis" />
+        <module name="spring03-anno" />
+        <module name="spring01-dic" />
+        <module name="spring05-proxy" />
+        <module name="spring06-AOP" />
+        <module name="spring08-IOC的理论推导" />
+        <module name="spring02-Autowired" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
