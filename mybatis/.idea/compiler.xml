@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mybatis-06多对一" />
+        <module name="mybatis-05注解" />
+        <module name="myvatis-08动态sql" />
+        <module name="mybatis-02" />
+        <module name="mybatis-01" />
+        <module name="mybatis-07一对多" />
+        <module name="mybatis-05使用注解开发" />
+        <module name="mybatis-03" />
+        <module name="mybatis-09缓存" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mybatis-01CRUD" target="1.5" />
+      <module name="mybatis-02xml配置" target="1.5" />
+      <module name="mybatis-03xml配置映射文件" target="1.5" />
+      <module name="mybatis-04使用注解开发" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
