@@ -1,0 +1,17 @@
+#配置文件到底能做什么?,---联系---spring.factories
+
+debug: true
+
+#Person:
+#  name: doer
+#  age: 20
+#  happy: false
+#  birth: 2000/11/14
+#  maps: {k1: v1,k2: v2}
+#  lists:
+#    - play
+#    - music
+#    - girl
+#  dog:
+#    name: 旺财
+#    age: 3
