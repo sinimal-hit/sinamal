@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.BuildingMapper">
+  <resultMap id="BaseResultMap" type="org.example.model.Building"
+        extends="org.example.mapper.DictionaryTagMapper.BaseResultMap">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="building_name" jdbcType="VARCHAR" property="buildingName" />
+    <result column="building_desc" jdbcType="VARCHAR" property="buildingDesc" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="dorm_count" property="dormCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, building_name, building_desc, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from building
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from building
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="org.example.model.Building" useGeneratedKeys="true">
+    insert into building (building_name, building_desc, create_time
+      )
+    values (#{buildingName,jdbcType=VARCHAR}, #{buildingDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="org.example.model.Building" useGeneratedKeys="true">
+    insert into building
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="buildingName != null">
+        building_name,
+      </if>
+      <if test="buildingDesc != null">
+        building_desc,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="buildingName != null">
+        #{buildingName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingDesc != null">
+        #{buildingDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.example.model.Building">
+    update building
+    <set>
+      <if test="buildingName != null">
+        building_name = #{buildingName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingDesc != null">
+        building_desc = #{buildingDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.example.model.Building">
+    update building
+    set building_name = #{buildingName,jdbcType=VARCHAR},
+      building_desc = #{buildingDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOne" parameterType="org.example.model.Building" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from building
+    <where>
+      <if test="buildingName != null">
+        and building_name = #{buildingName,jdbcType=VARCHAR}
+      </if>
+      <if test="buildingDesc != null">
+        and building_desc = #{buildingDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, building_name, building_desc, create_time
+    from building
+  </select>
+  <select id="selectByCondition" parameterType="org.example.model.Building" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from building
+    <where>
+      <if test="buildingName != null">
+        and building_name = #{buildingName,jdbcType=VARCHAR}
+      </if>
+      <if test="buildingDesc != null">
+        and building_desc = #{buildingDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from building
+      where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=",">
+      #{item}
+    </foreach>
+  </delete>
+
+
+
+
+
+  <!-- 自定义SQL -->
+  <select id="queryAsDict" resultMap="BaseResultMap">
+    select
+        id dictionary_tag_key,
+        building_name dictionary_tag_value
+    from building
+  </select>
+  <select id="query" resultMap="BaseResultMap">
+    select
+        b.*,
+        count(d.id) dorm_count
+    from building b
+        left join dorm d on b.id=d.building_id
+    <where>
+      <if test="searchText != null and searchText != ''">
+        b.building_name like concat('%', #{searchText}, '%')
+      </if>
+    </where>
+    group by b.id
+    order by b.id ${sortOrder}
+  </select>
+</mapper>
